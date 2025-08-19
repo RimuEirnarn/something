@@ -19,7 +19,7 @@ typedef struct Exception {
 void Exception_raise(struct Exception *self, int lineno, char *filename)
 {
     //  printf("%s at line %d, module '%s': %s\n", self->name, lineno, filename, self->reason);
-    printf("Traceback (most recent call last):\n  File \"%s\", line %d\n%s: %s\n", filename, lineno, self->name, self->reason);
+    fprintf(stderr, "Traceback (most recent call last):\n  File \"%s\", line %d\n%s: %s\n", filename, lineno, self->name, self->reason);
      exit(self->code);
 }
 
