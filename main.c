@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "stdrimu.h"
-#include "stderr.h"
 
 class AddressBook {
     String name;
@@ -45,7 +44,8 @@ LinkedAddress* pop_la(LinkedAddress *arr, AddressBook value) {
             LinkedAddress *prev = curr->prev;
             LinkedAddress *next = curr->next;
             prev->next = next;
-            if (next != NULL) next->prev = prev;
+            // if (next != NULL) next->prev = prev;
+            next->prev = prev;
             curr->prev = NULL;
             curr->next = NULL;
             // free(curr);
@@ -86,6 +86,7 @@ void print(LinkedAddress *arr) {
 }
 
 int main() {
+    protect();
     AddressBook ad = {
         define_str("Agus Sentosa"),
         define_str("000-000-000")
@@ -97,7 +98,7 @@ int main() {
     LinkedAddress *la = init_la(ad);
     push_la(la, ad0);
     LinkedAddress *lb0 = find_la_by_name(la, define_str("Agus Sentosa 2"));
-    lb0->value.name = define_str("Agus Sentosa 3");
+    // lb0->value.name = define_str("Agus Sentosa 3");
 
     print(la);
     LinkedAddress *lb = pop_la(la, ad0);

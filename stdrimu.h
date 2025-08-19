@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
+#include "stderr.h"
 #define not !
 #define or ||
 #define and &&
@@ -71,8 +73,6 @@
 #define forloop(var, end) for int ((int) ##var=0; ##var <= (end-1); ##var++)
 
 // isn't it a str?
-// #define str char
-// #define str_array char*
 // Simple while (true)
 #define forever() while (true)
 // repeat of (turn) because, why not?
@@ -92,6 +92,14 @@ String define_str(char* value) {
 #define STR_ARGS(sv) (int) (sv).length, (sv).value
 
 // printf("[%zu]\t-> " STR_FMT "\n", STR_ARGS(str));
+
+void sigsegv_handler(int signal) {
+    char fmt[1024];
+    sprintf(fmt, "[Code %d] Segmentation fault (core dumped? idk)", signal);
+    raise_from("OSError", fmt);
+}
+
+#define protect() signal(SIGSEGV, sigsegv_handler)
 
 /*
 "%.*s" -> count, string
