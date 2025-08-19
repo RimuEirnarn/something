@@ -44,8 +44,8 @@ LinkedAddress* pop_la(LinkedAddress *arr, AddressBook value) {
             LinkedAddress *prev = curr->prev;
             LinkedAddress *next = curr->next;
             prev->next = next;
-            // if (next != NULL) next->prev = prev;
-            next->prev = prev;
+            if (next != NULL) next->prev = prev;
+            // next->prev = prev;
             curr->prev = NULL;
             curr->next = NULL;
             // free(curr);
