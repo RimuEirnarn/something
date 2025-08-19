@@ -49,14 +49,14 @@ LinkedAddress* pop_la(LinkedAddress *arr, AddressBook value) {
             curr->prev = NULL;
             curr->next = NULL;
             // free(curr);
-            return curr; 
+            return curr;
         }
         curr = curr->next;
     }
     String val = value.name;
     char fmt[1024];
     sprintf(fmt, "Cannot find %.*s", val.length, val.value);
-    raise(fmt);
+    raise_from("ValueError", fmt);
 }
 
 LinkedAddress* find_la_by_name(LinkedAddress *arr, String name) {
@@ -65,18 +65,18 @@ LinkedAddress* find_la_by_name(LinkedAddress *arr, String name) {
         if (strcmp(curr->value.name.value, name.value) == 0) return curr;
         curr = curr->next;
     }
-    
+
     String val = name;
     char fmt[1024];
     sprintf(fmt, "Cannot find %.*s", val.length, val.value);
-    raise(fmt);
+    raise_from("ValueError", fmt);
 }
 
 
 void print(LinkedAddress *arr) {
     LinkedAddress *curr = arr;
-    while (curr != NULL) { 
-        AddressBook a = curr->value; 
+    while (curr != NULL) {
+        AddressBook a = curr->value;
         printf("Name  : " STR_FMT "\n", STR_ARGS(a.name));
         printf("Number: " STR_FMT "\n", STR_ARGS(a.phone_number));
         printf("---\n");

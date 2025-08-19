@@ -19,6 +19,8 @@
 #define throw2_(stuff, reason) stuff->_raise2(stuff, __LINE__, __FILE__)
 // Throw error at default but with configurable reason.
 #define raise(reason) Exception exc = Exception_init(""); throw2(exc, reason)
+// Throw an error with a reason, of a name
+#define raise_from(name, reason) Exception exc = Exception_init(""); exc.rename(&exc, name); throw2(exc, reason)
 // String-fy something.
 #define strfy(...) #__VA_ARGS__
 
