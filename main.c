@@ -59,6 +59,19 @@ LinkedAddress* pop_la(LinkedAddress *arr, AddressBook value) {
     raise(fmt);
 }
 
+LinkedAddress* find_la_by_name(LinkedAddress *arr, String name) {
+    LinkedAddress *curr = arr;
+    while (curr != NULL) {
+        if (strcmp(curr->value.name.value, name.value) == 0) return curr;
+        curr = curr->next;
+    }
+    
+    String val = name;
+    char fmt[1024];
+    sprintf(fmt, "Cannot find %.*s", val.length, val.value);
+    raise(fmt);
+}
+
 
 void print(LinkedAddress *arr) {
     LinkedAddress *curr = arr;
@@ -83,6 +96,8 @@ int main() {
     };
     LinkedAddress *la = init_la(ad);
     push_la(la, ad0);
+    LinkedAddress *lb0 = find_la_by_name(la, define_str("Agus Sentosa 2"));
+    lb0->value.name = define_str("Agus Sentosa 3");
 
     print(la);
     LinkedAddress *lb = pop_la(la, ad0);
