@@ -18,7 +18,7 @@ typedef struct Exception {
 
 void Exception_raise(struct Exception *self, int lineno, char *filename)
 {
-     printf("%s(%d) -> %s: %s\n", self->name, lineno, filename, self->reason);
+     printf("%s at line %d, module '%s': %s\n", self->name, lineno, filename, self->reason);
      exit(self->code);
 }
 
